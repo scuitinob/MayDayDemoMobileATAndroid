@@ -23,8 +23,6 @@ public class Actions {
     public static String mail= "avattar@avattar.com";
 
 
-
-
     public static void clickBtnIngresaCta(AndroidDriver driver, File path) throws IOException {
         if
 
