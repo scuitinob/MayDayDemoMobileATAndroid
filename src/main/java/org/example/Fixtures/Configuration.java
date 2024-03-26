@@ -22,10 +22,10 @@ public class Configuration {
     public static final String MC_SERVER_TENANT_ID = "999999999";
     public static final String MC_SERVER_WORKSPACE_NAME = "Default workspace";
     public static final String PLATFORM_NAME = "ANDROID";
-    public static final String UDID = "R9JR80985JF" ;
-    public static final String DEVICE_NAME = "android";
-    public static final String APP_PACKAGE = "cajalosandes.cla";
-    public static final String APP_ACTIVITY = "cl.cajalosandes.mobile.droid.ui.main.view.SplashActivity";
+    public static final String UDID = "PBJBOBUCGAMRDARW" ;
+    public static final String DEVICE_NAME = "Xiaomi 23026RN54G";
+    public static final String APP_PACKAGE = "com.meydey.meydey";
+    public static final String APP_ACTIVITY = "com.meydey.meydey.MainActivity";
     public static int TIMEOUT = 30;
     public static int numFoto = 0;
 
