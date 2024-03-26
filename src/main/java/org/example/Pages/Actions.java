@@ -1,12 +1,14 @@
 package org.example.Pages;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.example.ModificarTel;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,11 +22,57 @@ public class Actions {
     public static String montocredito = "100000";
     public static String cuotacredito= "12";
     public static String telefono= "45669368";
-    public static String mail= "avattar@avattar.com";
+    public static String email= "avattar@avattar.com";
+    public static String passwd = "123456";
+
+    //Inicio Login Test
+    public static void ingresarEmail(AndroidDriver driver, File path) throws IOException {
+        //Escribiendo email en login
+        if (waitForElement(driver, Locators.campoEmail)) {
+            System.out.println("Despliegue txtEmail");
+            driver.findElement(Locators.campoEmail).sendKeys(email);
+            System.out.println("Ingresar email");
+            Evidencia(driver, path, "snapshot");
+        } else {
+            System.out.println("ERROR - NO desplegó txtEmail");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+    public static void ingresarClave(AndroidDriver driver, File path) throws IOException {
+        //Escribiendo contraseña en login
+        if (waitForElement(driver, Locators.campoClave)) {
+            System.out.println("Despliegue txtClave");
+            driver.findElement(Locators.campoClave).sendKeys(passwd);
+            System.out.println("Ingresar Clave");
+            Evidencia(driver, path, "snapshot");
+        } else {
+            System.out.println("ERROR - NO desplegó pwClave");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+    public static void clickBtnIniSesion(AndroidDriver driver, File path) throws IOException {
+        if
+        (waitForElement(driver, Locators.btnIniSesion)){
+            System.out.println("Despliegue btnIniSesion");
+            driver.findElement(Locators.btnIniSesion).click();
+            System.out.println("Presiono boton IniSesion");
+            Evidencia(driver, path, "snapshot");
+        } else {
+            System.out.println("ERROR - No dio click IniSesion");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+    //Fin Login Test
 
 
 
 
+
+
+    //******References******//
     public static void clickBtnIngresaCta(AndroidDriver driver, File path) throws IOException {
         if
 
@@ -47,18 +95,6 @@ public class Actions {
             Evidencia(driver, path, "captura");
         } else {
             System.out.println("ERROR - NO desplegó Campo Rut");
-            Evidencia(driver, path, "error");
-            errorPrueba(driver);
-        }
-    }
-    public static void ingresarClave(AndroidDriver driver, File path) throws IOException {
-        if (waitForElement(driver, Locators.campoClave)) {
-            System.out.println("Despliegue campo Contraseña");
-            driver.findElement(Locators.campoClave).sendKeys(clave);
-            System.out.println("Ingresar contraseña");
-            Evidencia(driver, path, "captura");
-        } else {
-            System.out.println("ERROR - NO desplegó Campo Contraseña");
             Evidencia(driver, path, "error");
             errorPrueba(driver);
         }
@@ -123,15 +159,15 @@ public class Actions {
 
     public static void datosCredito(AndroidDriver driver, File path) throws IOException, InterruptedException {
         Thread.sleep(5000);
-        ModificarTel.scrollDown(driver);
+        Actions.scrollDown(driver);
         Thread.sleep(1000);
         driver.findElement(Locators.ingresarMonto).sendKeys(montocredito);
         driver.findElement(Locators.ingresarCuotas).sendKeys(cuotacredito);
         Thread.sleep(1000);
         driver.findElement(Locators.clickBtnSimularCredito).click();;
         Thread.sleep(5000);
-        ModificarTel.scrollDown(driver);
-        ModificarTel.scrollDown(driver);
+        Actions.scrollDown(driver);
+        Actions.scrollDown(driver);
         System.out.println("click monto credito y cuotas");
         Evidencia(driver, path, "captura");
     }
@@ -140,17 +176,36 @@ public class Actions {
         driver.findElement(Locators.clickBtnLoQuiero).click();
         Thread.sleep(5000);
         driver.findElement(Locators.ingresarTelefono).sendKeys(telefono);
-        driver.findElement(Locators.ingresarMail).sendKeys(mail);
+        driver.findElement(Locators.ingresarMail).sendKeys(email);
         Thread.sleep(1000);
         driver.findElement(Locators.clickEnviarDatos).click();
         Thread.sleep(10000);
         System.out.println("click boton envia datos");
         Evidencia(driver, path, "captura");
     }
+    public static void scrollDown (AndroidDriver driver){
+        Dimension dim = driver.manage() .window().getSize();
+        int start_x = (int) (dim.width * 0.5);
+        int start_y = (int) (dim.height * 0.8);
 
+        int end_x = (int) (dim.width * 0.5);
+        int end_y = (int) (dim.height * 0.5);
 
-
-
+        TouchAction act = new TouchAction (driver);
+        act.press(PointOption.point(start_x, start_y))
+                .waitAction (WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo (PointOption.point(end_x, end_y)).release().perform();
+    }
+    public static void Evidencia(AppiumDriver driver, File path, String tipoEvidencia) throws IOException {
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        int numFoto = 0;
+        if (tipoEvidencia.contains("error")) {
+            FileUtils.copyFile(src, new File(path + "/error" + numFoto + ".jpg"));
+        } else {
+            FileUtils.copyFile(src, new File(path + "/captura" + numFoto + ".jpg"));
+        }
+        numFoto += 1;
+    }
 }
 
 

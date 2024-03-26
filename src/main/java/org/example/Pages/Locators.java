@@ -4,9 +4,19 @@ import org.openqa.selenium.By;
 
 public class Locators {
 
+    public static By campoEmail = By.xpath("//android.widget.EditText[@text='tuemail@gmail.com']");
+    public static By campoClave = By.xpath("//android.view.ViewGroup[@text='Escribe tu nombre']");
+    public static By btnIniSesion = By.xpath("//android.widget.Button[@text='Iniciar sesión']");
+    public static By btnRegistro = By.xpath("android.widget.TextView");
+    public static By campoNombre = By.xpath("android.widget.EditText");
+    public static By campoApellido = By.xpath("android.widget.EditText");
+    public static By campoEmailRegistro = By.xpath("android.widget.EditText");
+    public static By btnSiguiente = By.xpath("android.widget.Button");
+    public static By btnVolver = By.xpath("android.widget.Button");
+
+
     public static By clickBtncta = By.xpath("//android.widget.Button[@text='Ingresa a tu cuenta']");
     public static By campoRut = By.xpath("//android.widget.EditText[@text='Ej.:12.345.678–9']");
-    public static By campoClave = By.xpath("//android.widget.EditText[@text='000000000']");
     public static By clickBtnIngresar = By.xpath("//android.widget.Button[@text='Ingresar']");
     public static By clickModal = By.xpath("//android.widget.Button[@text='Continuar']");
     public static By clickBtnFin = By.xpath("//android.widget.Button[@text='Finalizar']");
