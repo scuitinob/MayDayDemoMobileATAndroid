@@ -21,8 +21,8 @@ public class Configuration {
     public static final String MC_SERVER_TENANT_ID = "999999999";
     public static final String MC_SERVER_WORKSPACE_NAME = "Default workspace";
     public static final String PLATFORM_NAME = "ANDROID";
-    public static final String UDID = "PBJBOBUCGAMRDARW";
-    public static final String DEVICE_NAME = "Xiaomi 23026RN54G";
+    public static final String UDID = "R28M30VCN2P";
+    public static final String DEVICE_NAME = "Samsung SM-G975F";
     public static final String APP_PACKAGE = "com.meydey.meydey";
     public static final String APP_ACTIVITY = "com.meydey.meydey.MainActivity";
     public static int TIMEOUT = 30;
@@ -40,7 +40,7 @@ public class Configuration {
         capabilities.setCapability("oauthClientSecret", MC_SERVER_CLIENT_SECRET);
         capabilities.setCapability("tenantId", MC_SERVER_TENANT_ID);
         capabilities.setCapability("mcWorkspaceName", MC_SERVER_WORKSPACE_NAME);
-
+        capabilities.setCapability("noReset", true);
         AndroidDriver driver = new AndroidDriver(new URL(MC_SERVER + "/wd/hub"), capabilities);
         return driver;
     }

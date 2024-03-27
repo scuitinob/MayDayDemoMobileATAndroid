@@ -17,48 +17,71 @@ import java.time.Duration;
 import static org.example.Fixtures.Configuration.*;
 
 public class Actions {
-    public static String rut = "9233118-0";
-    public static String clave = "123456789a";
-    public static String montocredito = "100000";
-    public static String cuotacredito= "12";
-    public static String telefono= "45669368";
-    public static String email= "avattar@avattar.com";
-    public static String passwd = "123456";
+    public static String nombre = "Avattar";
+    public static String apellido = "Consulting";
+    public static String clave = "Avtr.2024";
+    public static String email= "maribella.moreno@avattar.com";
 
     //Inicio Login Test
-    public static void ingresarEmail(AndroidDriver driver, File path) throws IOException {
+    public static void permitirArchivosLogin(AndroidDriver driver, File path) throws IOException {
+        if (waitForElement(driver, Locators.permisoArchivos)) {
+            System.out.println("Despliegue permisoArchivos");
+            driver.findElement(Locators.permisoArchivos).click();
+            System.out.println("Permiso otorgado");
+            Evidencia(driver, path, "snapshot");
+        } else {
+            System.out.println("ERROR - NO desplegó permisoArchivos");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+    public static void clickBtnComenzar(AndroidDriver driver, File path) throws IOException, InterruptedException {
+        if (waitForElement(driver, Locators.btnComenzar)) {
+            driver.findElement(Locators.btnComenzar).click();
+            System.out.println("Presiono boton Comenzar");
+            Evidencia(driver, path, "captura");
+        }else{
+            System.out.println("ERROR - NO se encuentra btnComenzar");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+
+
+    }
+    public static void ingresarEmailLogin(AndroidDriver driver, File path) throws IOException {
         //Escribiendo email en login
         if (waitForElement(driver, Locators.campoEmail)) {
-            System.out.println("Despliegue txtEmail");
+            System.out.println("Despliegue campoEmail");
             driver.findElement(Locators.campoEmail).sendKeys(email);
             System.out.println("Ingresar email");
             Evidencia(driver, path, "snapshot");
         } else {
-            System.out.println("ERROR - NO desplegó txtEmail");
+            System.out.println("ERROR - NO desplegó campoEmail");
             Evidencia(driver, path, "error");
             errorPrueba(driver);
         }
     }
-    public static void ingresarClave(AndroidDriver driver, File path) throws IOException {
+    public static void ingresarClaveLogin(AndroidDriver driver, File path) throws IOException {
         //Escribiendo contraseña en login
         if (waitForElement(driver, Locators.campoClave)) {
-            System.out.println("Despliegue txtClave");
-            driver.findElement(Locators.campoClave).sendKeys(passwd);
+            System.out.println("Despliegue campoClave");
+            driver.findElement(Locators.campoClave).sendKeys(clave);
             System.out.println("Ingresar Clave");
             Evidencia(driver, path, "snapshot");
         } else {
-            System.out.println("ERROR - NO desplegó pwClave");
+            System.out.println("ERROR - NO desplegó campoClave");
             Evidencia(driver, path, "error");
             errorPrueba(driver);
         }
     }
-    public static void clickBtnIniSesion(AndroidDriver driver, File path) throws IOException {
+    public static void clickBtnIniSesionLogin(AndroidDriver driver, File path) throws IOException, InterruptedException {
         if
         (waitForElement(driver, Locators.btnIniSesion)){
             System.out.println("Despliegue btnIniSesion");
             driver.findElement(Locators.btnIniSesion).click();
             System.out.println("Presiono boton IniSesion");
             Evidencia(driver, path, "snapshot");
+            Thread.sleep(10000);
         } else {
             System.out.println("ERROR - No dio click IniSesion");
             Evidencia(driver, path, "error");
@@ -66,14 +89,115 @@ public class Actions {
         }
     }
     //Fin Login Test
+    //Inicio Registro Test
+    public static void clickBtnRegistroCta(AndroidDriver driver, File path) throws IOException {
+        if
+
+        (waitForElement(driver, Locators.btnRegistro)){
+            System.out.println("Despliegue Registro");
+            driver.findElement(Locators.btnRegistro).click();
+            System.out.println("Presiono boton click");
+            Evidencia(driver, path, "captura");
+        } else {
+            System.out.println("ERROR - No dio click");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+    public static void ingresarNombre(AndroidDriver driver, File path) throws IOException {
+        if (waitForElement(driver, Locators.campoNombre)) {
+            System.out.println("Despliegue campo Nombre");
+            driver.findElement(Locators.campoNombre).sendKeys(nombre);
+            System.out.println("Ingresar Nombre");
+            Evidencia(driver, path, "captura");
+        } else {
+            System.out.println("ERROR - NO desplegó Campo Nombre");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+
+    public static void ingresarApellido(AndroidDriver driver, File path) throws IOException {
+        if (waitForElement(driver, Locators.campoApellido)) {
+            System.out.println("Despliegue campo Apellido");
+            driver.findElement(Locators.campoApellido).sendKeys(apellido);
+            System.out.println("Ingresar Apellido");
+            Evidencia(driver, path, "captura");
+        } else {
+            System.out.println("ERROR - NO desplegó Campo Apellido");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+
+    public static void ingresarEmail(AndroidDriver driver, File path) throws IOException {
+        if (waitForElement(driver, Locators.campoEmailRegistro)) {
+            System.out.println("Despliegue campo Email");
+            driver.findElement(Locators.campoEmailRegistro).sendKeys(email);
+            System.out.println("Ingresar Email");
+            Evidencia(driver, path, "captura");
+        } else {
+            System.out.println("ERROR - NO desplegó Campo Email");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
+
+    public static void clickBtnSiguiente(AndroidDriver driver, File path) throws IOException, InterruptedException {
+        Thread.sleep(5000);
+        driver.findElement(Locators.btnSiguiente).click();
+        System.out.println("Presiono boton siguiente");
+        Evidencia(driver, path, "captura");
+    }
+
+    public static void ingresarClave(AndroidDriver driver, File path) throws IOException {
+        if (waitForElement(driver, Locators.campoClave)) {
+            System.out.println("Despliegue campo Contraseña");
+            driver.findElement(Locators.campoClave).sendKeys(clave);
+            System.out.println("Ingresar contraseña");
+            Evidencia(driver, path, "captura");
+        } else {
+            System.out.println("ERROR - NO desplegó Campo Contraseña");
+            Evidencia(driver, path, "error");
+            errorPrueba(driver);
+        }
+    }
 
 
+    //Fin Registro Test
+    //Inicio Generales//
+    public static void Evidencia(AppiumDriver driver, File path, String tipoEvidencia) throws IOException {
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        int numFoto = 0;
+        if (tipoEvidencia.contains("error")) {
+            FileUtils.copyFile(src, new File(path + "/error" + numFoto + ".jpg"));
+        } else {
+            FileUtils.copyFile(src, new File(path + "/captura" + numFoto + ".jpg"));
+        }
+        numFoto += 1;
+    }
+    public static void scrollLeft (AndroidDriver driver)throws IOException, InterruptedException {
+        Thread.sleep(5000);
+        Dimension dim = driver.manage() .window().getSize();
+        int start_x = (int) (dim.width * 0.8);
+        int start_y = (int) (dim.height * 0.5);
 
+        int end_x = (int) (dim.width * 0.1);
+        int end_y = (int) (dim.height * 0.5);
 
+        TouchAction act = new TouchAction (driver);
+        act.press(PointOption.point(start_x, start_y))
+                .waitAction (WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo (PointOption.point(end_x, end_y)).release().perform();
+        System.out.println("Realizando scrollLeft");
+
+    }
+    //Fin Generales//
 
 
 
     //******References******//
+    /*
     public static void clickBtnIngresaCta(AndroidDriver driver, File path) throws IOException {
         if
 
@@ -197,16 +321,8 @@ public class Actions {
                 .waitAction (WaitOptions.waitOptions(Duration.ofSeconds(1)))
                 .moveTo (PointOption.point(end_x, end_y)).release().perform();
     }
-    public static void Evidencia(AppiumDriver driver, File path, String tipoEvidencia) throws IOException {
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        int numFoto = 0;
-        if (tipoEvidencia.contains("error")) {
-            FileUtils.copyFile(src, new File(path + "/error" + numFoto + ".jpg"));
-        } else {
-            FileUtils.copyFile(src, new File(path + "/captura" + numFoto + ".jpg"));
-        }
-        numFoto += 1;
-    }
+
+    */
 }
 
 

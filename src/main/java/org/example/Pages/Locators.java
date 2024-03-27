@@ -4,9 +4,11 @@ import org.openqa.selenium.By;
 
 public class Locators {
 
+    public static By btnComenzar = By.xpath("//android.widget.TextView[@Text='Comenzar']");
+    public static By permisoArchivos = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]");
     public static By campoEmail = By.xpath("//android.widget.EditText[@text='tuemail@gmail.com']");
-    public static By campoClave = By.xpath("//android.view.ViewGroup[@text='Escribe tu nombre']");
-    public static By btnIniSesion = By.xpath("//android.widget.Button[@text='Iniciar sesión']");
+    public static By campoClave = By.xpath("//android.widget.EditText[@text='*******']");
+    public static By btnIniSesion = By.xpath("//android.widget.Button[@content-desc='Iniciar sesión']");
     public static By btnRegistro = By.xpath("//android.widget.TextView");
 
     public static By campoNombre = By.xpath("//android.widget.EditText[@text='Escribe tu nombre']");

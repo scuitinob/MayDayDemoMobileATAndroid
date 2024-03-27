@@ -8,6 +8,7 @@ import org.example.Pages.Actions;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -27,10 +28,16 @@ public class Steps {
 
         try{
             //Login Test
-            Actions.ingresarEmail(driver, path);
-            Actions.ingresarClave(driver, path);
-            Actions.clickBtnIniSesion(driver, path);
-            //Login Test
+
+            //Actions.scrollLeft(driver);
+            //Actions.scrollLeft(driver);
+            //Actions.scrollLeft(driver);
+            //Actions.clickBtnComenzar(driver, path);
+
+            Actions.ingresarEmailLogin(driver, path);
+            Actions.ingresarClaveLogin(driver, path);
+            Actions.clickBtnIniSesionLogin(driver, path);
+            // Test
         }catch (Exception e){
             Actions.Evidencia(driver, path, "error");
             System.out.println("Test failed");
