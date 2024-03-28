@@ -20,24 +20,21 @@ public class Steps {
         Date date = new Date();
         DateFormat hourdateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String historial = hourdateFormat.format(date);
-
         File path = new File("C:/Eviencias_" + historial);
         path.mkdirs();
-
         AndroidDriver driver = Configuration.capabilities();
-
         try{
-            //Login Test
-
-            //Actions.scrollLeft(driver);
-            //Actions.scrollLeft(driver);
-            //Actions.scrollLeft(driver);
-            //Actions.clickBtnComenzar(driver, path);
-
+            //Inicio Login Test
             Actions.ingresarEmailLogin(driver, path);
             Actions.ingresarClaveLogin(driver, path);
             Actions.clickBtnIniSesionLogin(driver, path);
-            // Test
+            // Fin Login Test
+
+            //Inicio Logout Test
+            Actions.clickMenuHamburguesa(driver, path);
+            Actions.clickCerrarSesion(driver, path);
+            //Fin Logout Test
+
         }catch (Exception e){
             Actions.Evidencia(driver, path, "error");
             System.out.println("Test failed");
