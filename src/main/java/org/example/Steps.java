@@ -8,6 +8,7 @@ import org.example.Pages.Actions;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -19,18 +20,21 @@ public class Steps {
         Date date = new Date();
         DateFormat hourdateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String historial = hourdateFormat.format(date);
-
         File path = new File("C:/Eviencias_" + historial);
         path.mkdirs();
-
         AndroidDriver driver = Configuration.capabilities();
-
         try{
-            //Login Test
-            Actions.ingresarEmail(driver, path);
-            Actions.ingresarClave(driver, path);
-            Actions.clickBtnIniSesion(driver, path);
-            //Login Test
+            //Inicio Login Test
+            Actions.ingresarEmailLogin(driver, path);
+            Actions.ingresarClaveLogin(driver, path);
+            Actions.clickBtnIniSesionLogin(driver, path);
+            // Fin Login Test
+
+            //Inicio Logout Test
+            Actions.clickMenuHamburguesa(driver, path);
+            Actions.clickCerrarSesion(driver, path);
+            //Fin Logout Test
+
         }catch (Exception e){
             Actions.Evidencia(driver, path, "error");
             System.out.println("Test failed");
